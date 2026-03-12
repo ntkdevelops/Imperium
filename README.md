@@ -9,8 +9,8 @@
 </p>
 
 <p align="center">
-  A pet project remake of <a href="https://notion.so">Notion</a> built from scratch to work on my development skills.<br>
-  No frameworks. No libraries. Just vanilla HTML, CSS, and JavaScript.
+  A personal project inspired by <a href="https://notion.so">Notion</a>, created to deepen my understanding of modern front-end architecture.<br>
+  Built entirely with vanilla HTML, CSS, and JavaScript — no frameworks, no external libraries.
 </p>
 
 <p align="center">
@@ -22,217 +22,216 @@
 
 ---
 
-## 🎯 Why I Built This
+## Overview
 
-I wanted to challenge myself by rebuilding a complex, real-world productivity app without reaching for any framework. Notion's UI is packed with subtle interactions — contenteditable blocks, drag-and-drop, nested page trees, kanban boards — and recreating them from scratch taught me a ton about DOM manipulation, state management, and event-driven architecture.
+Imperium is a browser-based productivity application designed as a technical exercise in recreating a complex interface similar to Notion. The goal of the project was to implement advanced UI patterns — block-based editing, drag-and-drop interactions, hierarchical navigation, and dynamic views — using only native web technologies.
 
-This is **not** meant to replace Notion. It's a learning exercise, a skill sharpener, and a portfolio piece. 🏋️
+The application runs entirely on the client and stores all data locally. It is intended as a learning project and portfolio demonstration rather than a production alternative to Notion.
 
 ---
 
-## ✨ Features
+## Features
 
-### 📄 Block-Based Editor
-- Rich text editing with `contenteditable` — **bold**, *italic*, <u>underline</u>, ~~strikethrough~~, `inline code`, links
-- **11 block types:** paragraph, headings (H1–H3), bullet list, numbered list, to-do, code, quote, divider, callout
-- ⚡ Slash command menu (`/`) with fuzzy filtering and keyboard navigation
-- ✍️ Markdown shortcuts — type `# `, `- `, `[] `, `> `, `` ``` ``, `---` + space to auto-convert
-- 📐 Block indentation (Tab / Shift+Tab, up to 6 levels)
-- ✂️ Split & merge blocks with Enter and Backspace
-- 🖊️ Floating toolbar appears on text selection
+### Block-Based Editor
 
-### 📋 Kanban Boards
-- 🔀 Toggle any page between document and board view
-- 🖱️ Drag-and-drop cards between columns
-- 🏷️ Card details modal — title, description, priority, due date, color-coded labels
-- 🎨 Column management — rename, recolor (8 colors), delete
+- Rich text editing using `contenteditable`
+- Inline formatting: bold, italic, underline, strikethrough, inline code, and links
+- Eleven block types:
+  - Paragraph
+  - Headings (H1–H3)
+  - Bullet list
+  - Numbered list
+  - To-do
+  - Code block
+  - Quote
+  - Divider
+  - Callout
+- Slash command menu with keyboard navigation and fuzzy filtering
+- Markdown-style shortcuts (`#`, `-`, `>`, code fences, etc.)
+- Block indentation with Tab / Shift+Tab (up to six levels)
+- Block splitting and merging via Enter and Backspace
+- Floating formatting toolbar on text selection
 
-### 🗂️ Sidebar & Navigation
-- 🌳 Recursive page tree with infinite nesting
-- 📂 Expand/collapse child pages
-- ⭐ Favorites section for quick access
-- 🔍 Full-text search across page titles and block content
-- 📋 Right-click context menu — rename, duplicate, favorite, add sub-page, delete
-- ↔️ Resizable sidebar (drag handle, 200–480px)
-- 🗑️ Soft-delete with trash and restore
+### Kanban Boards
 
-### 🌗 Theming
-- ☀️ Light and 🌙 dark mode with smooth Notion-style neutral palettes
-- 💾 Persisted preference across sessions
+- Toggle between document and board view
+- Drag-and-drop cards across columns
+- Card detail modal with description, labels, priority, and due date
+- Column management including rename, color selection, and deletion
 
-### ⌨️ Keyboard Shortcuts
+### Sidebar and Navigation
+
+- Hierarchical page tree with unlimited nesting
+- Expand and collapse child pages
+- Favorites section for quick access
+- Full-text search across page titles and content
+- Context menu actions: rename, duplicate, favorite, create sub-page, delete
+- Resizable sidebar
+- Soft-delete system with restore from trash
+
+### Theming
+
+- Light and dark interface themes
+- Theme preference persisted between sessions
+
+### Keyboard Shortcuts
 
 | Shortcut | Action |
 |---|---|
-| `Ctrl + N` | 📄 New page |
-| `Ctrl + P` | 🔍 Focus search |
-| `Ctrl + /` | 📂 Toggle sidebar |
-| `Ctrl + Shift + D` | 🌗 Toggle dark mode |
-| `Ctrl + B / I / U` | ✏️ Bold / Italic / Underline |
-| `Ctrl + E` | 💻 Inline code |
-| `Ctrl + K` | 🔗 Insert link |
-| `Ctrl + D` | 📋 Duplicate block |
-| `Ctrl + Shift + ↑/↓` | 🔀 Move block up/down |
-| `Tab / Shift+Tab` | 📐 Indent / Outdent |
-| `/` | ⚡ Open slash command menu |
+| `Ctrl + N` | Create new page |
+| `Ctrl + P` | Focus search |
+| `Ctrl + /` | Toggle sidebar |
+| `Ctrl + Shift + D` | Toggle dark mode |
+| `Ctrl + B / I / U` | Text formatting |
+| `Ctrl + E` | Inline code |
+| `Ctrl + K` | Insert link |
+| `Ctrl + D` | Duplicate block |
+| `Ctrl + Shift + ↑/↓` | Move block |
+| `Tab / Shift+Tab` | Indent / outdent |
+| `/` | Open slash command menu |
 
-### 💾 Persistence
-- All data lives in `localStorage` — nothing is sent to any server
-- Instant save on every edit (debounced at 300ms)
-- Survives page refreshes and browser restarts
+### Data Persistence
+
+- All data stored locally using `localStorage`
+- Automatic save on edits with a debounced update cycle
+- Data persists across page reloads and browser restarts
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
-Zero dependencies. ~2,500 lines of JavaScript organized into **8 focused modules**:
+The application follows a modular architecture and avoids external dependencies. Approximately 2,500 lines of JavaScript are organized into eight focused modules.
 
 ```
 imperium/
-├── 🏠 index.html              SPA shell — sidebar, main content, overlays
-├── 🎨 css/
-│   └── styles.css              1,350+ lines — CSS variables, light/dark themes, all components
-└── ⚙️ js/
-    ├── utils.js                🔧 UUID generation, debounce, date formatting, caret helpers, toasts
-    ├── store.js                💾 localStorage CRUD — pages, blocks, boards, cards, settings, trash
-    ├── app.js                  🚀 Bootstrap, hash routing (#page/id), theme, global shortcuts
-    ├── sidebar.js              🗂️  Page tree, search, favorites, trash, context menu, resize
-    ├── editor.js               ✏️  Block editor — contenteditable, key handling, inline formatting
-    ├── commands.js             ⚡ Slash command menu with filtering and keyboard nav
-    ├── kanban.js               📋 Board view — columns, cards, detail modal
-    └── dragdrop.js             🖱️  Drag-and-drop for cards between columns & block reorder
+├── index.html
+├── css/
+│   └── styles.css
+└── js/
+    ├── utils.js
+    ├── store.js
+    ├── app.js
+    ├── sidebar.js
+    ├── editor.js
+    ├── commands.js
+    ├── kanban.js
+    └── dragdrop.js
 ```
 
-### 📊 Data Model
+### Module Responsibilities
 
-All state is stored under the `notion_data` key in localStorage as a single JSON object:
+| Module | Responsibility |
+|---|---|
+| utils.js | Helper utilities such as UUID generation, debounce functions, caret utilities, and notifications |
+| store.js | Data persistence layer managing `localStorage` serialization |
+| app.js | Application bootstrap, routing, theme handling, and global keyboard shortcuts |
+| sidebar.js | Page tree rendering, search, favorites, and context menus |
+| editor.js | Block editor logic and text editing interactions |
+| commands.js | Slash command system with filtering and keyboard navigation |
+| kanban.js | Board view including columns, cards, and modal editing |
+| dragdrop.js | Drag-and-drop behavior for cards and block ordering |
+
+---
+
+## Data Model
+
+All application state is stored under a single `localStorage` key (`notion_data`) as a serialized JSON object.
 
 ```
-┌─────────────────────────────────────────────────┐
-│  📦 notion_data                                 │
-│                                                 │
-│  ┌───────────┐        ┌───────────┐             │
-│  │ 📄 pages  │───────▶│ 📝 blocks │             │
-│  │   (tree)  │        │   (flat)  │             │
-│  └───────────┘        └───────────┘             │
-│                                                 │
-│  ┌───────────┐        ┌───────────┐             │
-│  │ 📋 boards │───────▶│ 🃏 cards  │             │
-│  │  (kanban) │        │   (flat)  │             │
-│  └───────────┘        └───────────┘             │
-│                                                 │
-│  ┌───────────┐        ┌───────────┐             │
-│  │ ⚙️ settings│        │ 🗑️ trash  │             │
-│  └───────────┘        └───────────┘             │
-└─────────────────────────────────────────────────┘
+notion_data
+├── pages
+├── blocks
+├── boards
+├── cards
+├── settings
+└── trash
 ```
 
 | Entity | Description |
 |---|---|
-| **Pages** | Flat map keyed by ID. Parent/child references form a tree. |
-| **Blocks** | Flat map keyed by ID, each belonging to a page. 11 types with type-specific properties. |
-| **Boards** | One per kanban page. Contains ordered columns, each with ordered card IDs. |
-| **Cards** | Flat map keyed by ID. Title, description, labels, priority, due date. |
-| **Settings** | Theme, sidebar width, collapsed state, last opened page. |
-| **Trash** | Soft-deleted pages and blocks — fully restorable. |
+| Pages | Flat object keyed by ID; parent references form the page hierarchy |
+| Blocks | Individual editor blocks associated with pages |
+| Boards | Kanban board configuration for pages using board view |
+| Cards | Card objects belonging to board columns |
+| Settings | UI preferences such as theme and sidebar width |
+| Trash | Soft-deleted items available for restoration |
 
-### 🔄 How Modules Talk
-
-```
-  ┌─────────┐        navigateTo()       ┌──────────┐
-  │ Sidebar │ ──────────────────────────▶│   App    │  🚀 Router + coordinator
-  └─────────┘                            └──────────┘
-       │                                   │      │
-       │ renderTree()          ┌───────────┘      │
-       │                       ▼                  ▼
-       │               ┌──────────┐       ┌──────────┐
-       └──────────────▶│  Editor  │       │  Kanban  │
-                       └──────────┘       └──────────┘
-                           │                   │
-                    ┌──────┘                   │
-                    ▼                          ▼
-              ┌──────────┐             ┌──────────┐
-              │ Commands │             │ DragDrop │
-              └──────────┘             └──────────┘
-                    │                       │
-                    └───────┐   ┌───────────┘
-                            ▼   ▼
-                       ┌──────────┐
-                       │  Store   │ ◀──── 💾 Single source of truth
-                       └──────────┘
-                            │
-                            ▼
-                      localStorage
-```
-
-All modules read/write through **Store**, which handles serialization to `localStorage`. **App** acts as the router and coordinator — **Sidebar** triggers navigation, and App decides whether to render the **Editor** or **Kanban** view based on page type.
+The Store module acts as the single source of truth, coordinating read and write operations with `localStorage`.
 
 ---
 
-## 🚀 Getting Started
+## Application Flow
 
-### Run Locally
+```
+Sidebar → App Router → Editor or Kanban View
+                     ↓
+                  Store
+                     ↓
+                localStorage
+```
+
+Navigation events originate in the sidebar and are routed through the App module. Based on page configuration, either the editor or the kanban interface is rendered. All state changes pass through the Store module.
+
+---
+
+## Running the Project
+
+### Local Development
 
 ```bash
-# Clone the repo
 git clone https://github.com/YOUR_USERNAME/imperium.git
 cd imperium
-
-# Install deps (only express for the dev server)
 npm install
-
-# Start the server
 node server.js
-
-# Open in browser 🌐
-# http://localhost:3000/notion
 ```
 
-### Or Just Open the File
+Open in a browser:
 
-Since Imperium is a pure client-side app, you can open `notion/index.html` directly in your browser — everything works without a server. 🎉
+```
+http://localhost:3000/notion
+```
 
----
+### Direct File Access
 
-## 📸 Screenshots
-
-> 🖼️ _Coming soon — screenshots of the editor, kanban board, dark mode, slash commands, and more._
-
----
-
-## 🧠 What I Learned
-
-- 🔤 How `contenteditable` really works — caret manipulation, range APIs, `execCommand`, and all its quirks
-- 🧱 Building a block-based editor from scratch (splitting/merging blocks, indent management)
-- 🖱️ Implementing drag-and-drop without any library
-- 🗄️ Designing a flat data model with relational references that serializes cleanly to JSON
-- 🎨 CSS custom properties for theming and structuring a large stylesheet
-- 🧭 Hash-based SPA routing without a framework
-- ⏱️ The importance of debouncing when dealing with frequent DOM events
+Because Imperium is entirely client-side, the application can also be opened directly by loading `notion/index.html` in a browser.
 
 ---
 
-## 🛣️ Roadmap
+## Learning Outcomes
 
-- [ ] 🤝 Real-time collaboration (WebSocket sync)
-- [ ] 📤 Export to Markdown / PDF
-- [ ] 🖼️ Image and file block types
-- [ ] 📊 Database / table view
-- [ ] ↩️ Undo/redo history stack
-- [ ] 📱 Mobile-responsive layout
-- [ ] 🗃️ IndexedDB for larger data sets
-- [ ] 📲 PWA support (offline, installable)
+This project served as an exploration of several front-end engineering topics:
+
+- Implementing a block-based text editor using `contenteditable`
+- Caret and selection manipulation through the Range API
+- Building drag-and-drop interfaces without external libraries
+- Designing a normalized data model suitable for JSON serialization
+- Implementing SPA-style routing without frameworks
+- Managing frequent DOM updates with debounced persistence
+- Structuring a large CSS codebase using variables and component patterns
 
 ---
 
-## 📄 License
+## Future Improvements
 
-This project is open source and available under the [MIT License](LICENSE).
+- Real-time collaboration using WebSockets
+- Markdown and PDF export
+- Image and file block support
+- Table and database-style views
+- Undo and redo history
+- Responsive mobile layout
+- Migration from `localStorage` to IndexedDB
+- Progressive Web App support
+
+---
+
+## License
+
+This project is released under the MIT License.
 
 ---
 
 <p align="center">
   <img src="https://i.imgur.com/JpFF3n1.png" alt="Imperium" width="40">
   <br>
-  <em>Built with ☕ and curiosity — no frameworks were harmed in the making of this project.</em>
+  <em>Built as an educational project focused on understanding complex front-end systems without frameworks.</em>
 </p>
