@@ -1,7 +1,3 @@
-<p align="center">
-  <img src="https://i.imgur.com/JpFF3n1.png" alt="Imperium Logo" width="120">
-</p>
-
 <h1 align="center">Imperium</h1>
 
 <p align="center">
